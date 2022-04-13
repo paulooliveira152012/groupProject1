@@ -13,7 +13,7 @@ link: https://opentdb.com/api_config.php
 Project Due 24th
 
 
-----------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
 ## Your project should fulfill the following requirements:
 
 * Use a CSS framework other than Bootstrap.
