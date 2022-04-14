@@ -3,6 +3,9 @@ fetch("https://opentdb.com/api.php?amount=10&category=18")
 .then(response => response.json())
 .then(data => console.log(data));
 
+// ---------------------------------------------------------------------
+//getting the button to work and start timer
+
 let clockId;
 let time = 60;
 let banner = document.querySelector('.banner');
@@ -22,3 +25,4 @@ function handleClock() {
     };
     time--;
 };
+// ---------------------------------------------------------------------
