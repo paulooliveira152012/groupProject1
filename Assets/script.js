@@ -1,9 +1,18 @@
 siteContentEl = $("#site-content")
 
 //return response
+var questionsArray
+
 fetch("https://opentdb.com/api.php?amount=10&category=18")
-.then(response => response.json())
-.then(data => console.log(data));
+.then(function(response) {
+    if (response.ok){
+        response.json().then(function(data) {
+            questionsArray = data.results
+        })
+    } else {
+        console.log("API Error")
+    }
+})
 
 fetch("https://icanhazdadjoke.com/")
 .then(response => response.json())
@@ -53,5 +62,9 @@ bannerObj.createObj()
 
 $("#startBtn").on("click", function(){
     bannerObj.removeObj();
+    console.log(questionsArray)
 });
 
+const createQuestion = function(){
+
+}
