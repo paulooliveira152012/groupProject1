@@ -34,5 +34,9 @@ function handleClock() {
 var startBtn = $("#startBtn");
 
 $("#startBtn").on("click", function() {
-    window.alert("test")
 });
+
+$("#startBtn").on("click", function() {
+    $(".banner").addClassList("hide")
+})
+
