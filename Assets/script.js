@@ -1,3 +1,5 @@
+siteContentEl = $("#site-content")
+
 //return response
 fetch("https://opentdb.com/api.php?amount=10&category=18")
 .then(response => response.json())
@@ -14,7 +16,6 @@ let clockId;
 let time = 60;
 let banner = document.querySelector('.banner');
 let clock = document.querySelector('#time');
-document.getElementById('startBtn').addEventListener('click',handleStart);
 
 function handleStart() {
     clockId = setInterval(handleClock,1000);
@@ -33,10 +34,24 @@ function handleClock() {
 
 var startBtn = $("#startBtn");
 
-$("#startBtn").on("click", function() {
-});
+const bannerObj = {
+    createObj: function(){
+        this.obj = $("<div></div>").addClass("banner")
+        this.title = $("<h1></h1>").text("Trivia Game")
+        this.content = $("<p></p>").text("Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!")
+        this.startBtn = $("<button></button>").text("Start Quiz").attr("id", "startBtn")
+        this.obj.append(this.title, this.content, this.startBtn)
+        siteContentEl.append(this.obj)
+    },
+    removeObj: function(){
+        this.obj.remove()
+        console.log("removed");
+    }
+} 
 
-$("#startBtn").on("click", function() {
-    $(".banner").addClassList("hide")
-})
+bannerObj.createObj()
+
+$("#startBtn").on("click", function(){
+    bannerObj.removeObj();
+});
 
