@@ -33,10 +33,10 @@ function handleClock() {
 
 var startBtn = $("#startBtn");
 
-$("#startBtn").on("click", function() {
-});
+
 
 $("#startBtn").on("click", function() {
-    $(".banner").addClassList("hide")
-})
+    banner.innerHTML=""
+});
+
 
