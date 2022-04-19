@@ -1,13 +1,14 @@
 siteContentEl = $("#site-content")
-
+// var promptUser = prompt("How many questions would you like?")
 //return response
 var questionsArray
 
-fetch("https://opentdb.com/api.php?amount=10&category=18")
+fetch(`https://opentdb.com/api.php?amount=10&category=18`)
 .then(function(response) {
     if (response.ok){
         response.json().then(function(data) {
             questionsArray = data.results
+            // rightQuiz(data.results)
         })
     } else {
         console.log("API Error")
@@ -41,7 +42,7 @@ function handleClock() {
 };
 // ---------------------------------------------------------------------
 
-var startBtn = $("#startBtn");
+// var startBtn = $("#startBtn");
 
 const bannerObj = {
     createObj: function(){
@@ -63,8 +64,35 @@ bannerObj.createObj()
 $("#startBtn").on("click", function(){
     bannerObj.removeObj();
     console.log(questionsArray)
+    rightQuiz(questionsArray)
+    handleStart()
 });
 
 const createQuestion = function(){
 
+}
+
+function rightQuiz(data) {
+    var mainContainer = $("#site-content")
+    var question = document.createElement("h1")
+    question.textContent = data[0].question
+    console.log(question)
+    mainContainer.append(question)
+    var answerList = []
+    var correctAnswer = data[0].correct_answer
+    console.log(correctAnswer)
+    answerList.push(correctAnswer)
+    // incorrectAnswer = data[0].
+    var incorrectAnswer = data[0].incorrect_answers
+    console.log(incorrectAnswer)
+    incorrectAnswer.forEach(element => {
+        answerList.push(element)
+    });
+    console.log(answerList)
+    answerList.forEach(btn => {
+        var answerBtn = document.createElement('button')
+        answerBtn.textContent=btn
+        console.log(answerBtn)
+        mainContainer.append(answerBtn)
+    })
 }
