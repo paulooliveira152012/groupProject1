@@ -44,6 +44,7 @@ function handleClock() {
 
 // var startBtn = $("#startBtn");
 
+
 const bannerObj = {
     createObj: function(){
         this.obj = $("<div></div>").addClass("banner")
@@ -71,6 +72,7 @@ $("#startBtn").on("click", function(){
 const createQuestion = function(){
 
 }
+
 
 function rightQuiz(data) {
     var mainContainer = $("#site-content")
