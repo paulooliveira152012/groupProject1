@@ -96,3 +96,9 @@ function rightQuiz(data) {
         mainContainer.append(answerBtn)
     })
 }
+// ---------------------------------------------------------------------
+
+//adding next button as we start the quiz
+
+
+// ---------------------------------------------------------------------

@@ -21,3 +21,7 @@ button{
     padding: 8px;
     cursor: pointer;
 }
+
+button:hover {
+    background-color: plum;
+}
