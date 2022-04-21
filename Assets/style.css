@@ -22,3 +22,9 @@ button{
     cursor: pointer;
 }
 
+<<<<<<< HEAD
+=======
+button:hover {
+    background-color: plum;
+}
+>>>>>>> 78638896be0c93f39d6007ee5529ff84c1cef60b
