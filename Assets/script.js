@@ -119,25 +119,38 @@ function rightQuiz(data, Q) {
 
 // create a variable to catch the "correct_answer" value
 
-
+var score = 0
 function selectingAnswer(ca, dataArr) {
     var correctAnswer = $("correct_answer")
     console.log(ca)
     if(ca === dataArr[questionIndex].correct_answer)
     {
-        
+        //Add score
+        score += 5
+        console.log(score)
         console.log("correct")
         
     } else {
         console.log("wrong")
     }
     // questionIndex ++ 
+    console.log(dataArr.length)
     nextQuestion(dataArr, questionIndex++)
 } 
 
 // ---------------------------------------------------------------------
 
 function nextQuestion(D,Q) {
-    rightQuiz(D,Q)
+    console.log(D.length)
+    if(Q >= D.length){
+        console.log("Done")
+        end()
+    }else{
+        rightQuiz(D,Q)
+    }
 } 
 
+function end() {
+    bannerObj.removeObj()
+    window.alert(score)
+}
