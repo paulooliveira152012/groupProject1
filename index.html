@@ -14,33 +14,15 @@
     <link rel="stylesheet" href="Assets/style.css">
     <title>Trivia</title>
 </head>
-<body>
-<header>
-        <a href="highScore">View high scores</a>
-        <h3>Time:<span id="time">0</span></h3>
-</header>
+    <body>
+        <header>
+                <a href="highScore">View high scores</a>
+                <h3>Time:<span id="time">60</span></h3>
+        </header>
 
-<main>
-    <div class="banner">
-        <h1>Trivia Game</h1>
-        <p>Try to answer the following code-related questions within the time limit. Keep in midn that incorrect
-            answeres will penalize your score/time by ten seconds!</p>
-    
-        <button id="startBtn">Start Quiz</button>
-    </div>
-
-    <div class="columns is-mobile">
-        <div class="column is-half">
-          First column
-        </div>
-        <div class="column is-half">
-          Second column
-        </div>
-      </div>
-
-</main>
-
-        <main id="site-content">
+        <main id="site-content" class="container has-text-centered">
+            <h1 class="m-5 is-size-3">Computer Science Trivia</h1>
+            <section id="question-container" class="m-4"></section>
 
         </main>
             

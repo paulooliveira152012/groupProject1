@@ -75,11 +75,12 @@ const createQuestion = function(){
 
 
 function rightQuiz(data) {
-    var mainContainer = $("#site-content")
-    var question = document.createElement("h1")
+    var questionContainer = $("#question-container")
+    var question = document.createElement("p")
+    question.classList.add("m-4")
     question.textContent = data[0].question
     console.log(question)
-    mainContainer.append(question)
+    questionContainer.append(question)
     var answerList = []
     var correctAnswer = data[0].correct_answer
     console.log(correctAnswer)
@@ -93,9 +94,10 @@ function rightQuiz(data) {
     console.log(answerList)
     answerList.forEach(btn => {
         var answerBtn = document.createElement('button')
+        answerBtn.classList.add("m-1")
         answerBtn.textContent=btn
         console.log(answerBtn)
-        mainContainer.append(answerBtn)
+        questionContainer.append(answerBtn)
     })
 }
 // ---------------------------------------------------------------------
