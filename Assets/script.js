@@ -1,3 +1,5 @@
+var scoreEl = $("#finalScore")
+
 siteContentEl = $("#site-content")
 // var promptUser = prompt("How many questions would you like?")
 //return response
@@ -80,6 +82,7 @@ const createQuestion = function(){
 }
 var questionIndex = 0;
 var mainContainer = document.querySelector("#site-content")
+
 function rightQuiz(data, Q) {
     console.log(data)
     mainContainer.innerHTML=" ";
@@ -133,24 +136,32 @@ function selectingAnswer(ca, dataArr) {
     } else {
         console.log("wrong")
     }
-    // questionIndex ++ 
+    questionIndex ++ 
     console.log(dataArr.length)
-    nextQuestion(dataArr, questionIndex++)
+    nextQuestion(dataArr)
 } 
 
 // ---------------------------------------------------------------------
 
-function nextQuestion(D,Q) {
+function nextQuestion(D) {
     console.log(D.length)
-    if(Q >= D.length){
+    console.log(questionIndex)
+    if(questionIndex >= D.length){
         console.log("Done")
         end()
     }else{
-        rightQuiz(D,Q)
+        rightQuiz(D,questionIndex)
     }
 } 
 
 function end() {
     bannerObj.removeObj()
     window.alert(score)
+    clearInterval(clockId);
+    finalScore()
+}
+
+
+function finalScore() {
+    scoreEl.text(`Your final score is ` + score );
 }
