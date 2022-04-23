@@ -1,19 +1,27 @@
+var scoreEl = $("#finalScore")
+
 siteContentEl = $("#site-content")
 // var promptUser = prompt("How many questions would you like?")
 //return response
-var questionsArray
+// var questionsArray = []
+function getData(){
+    fetch(`https://opentdb.com/api.php?amount=10&category=18`)
+    .then(function(response) {
+        if (response.ok){
+            response.json().then(function(data) {
+                // questionsArray = data.results
+                // questionsArray.concat(data.results)
+                // console.log(questionsArray)
+                rightQuiz(data.results)
+                console.log(data.results)
+            })
+        } else {
+            console.log("API Error")
+        }
+    })
+}
 
-fetch(`https://opentdb.com/api.php?amount=10&category=18`)
-.then(function(response) {
-    if (response.ok){
-        response.json().then(function(data) {
-            questionsArray = data.results
-            // rightQuiz(data.results)
-        })
-    } else {
-        console.log("API Error")
-    }
-})
+
 
 fetch("https://icanhazdadjoke.com/")
 .then(response => response.json())
@@ -44,7 +52,6 @@ function handleClock() {
 
 // var startBtn = $("#startBtn");
 
-
 const bannerObj = {
     createObj: function(){
         this.obj = $("<div></div>").addClass("banner")
@@ -64,45 +71,101 @@ bannerObj.createObj()
 
 $("#startBtn").on("click", function(){
     bannerObj.removeObj();
-    console.log(questionsArray)
-    rightQuiz(questionsArray)
+    // console.log(questionsArray)
+    // rightQuiz(questionsArray)
+    getData()
     handleStart()
 });
 
 const createQuestion = function(){
 
 }
+var questionIndex = 0;
+var mainContainer = document.querySelector("#site-content")
 
-
-function rightQuiz(data) {
-    var questionContainer = $("#question-container")
-    var question = document.createElement("p")
-    question.classList.add("m-4")
-    question.textContent = data[0].question
-    console.log(question)
-    questionContainer.append(question)
-    var answerList = []
-    var correctAnswer = data[0].correct_answer
-    console.log(correctAnswer)
-    answerList.push(correctAnswer)
-    // incorrectAnswer = data[0].
-    var incorrectAnswer = data[0].incorrect_answers
-    console.log(incorrectAnswer)
-    incorrectAnswer.forEach(element => {
-        answerList.push(element)
-    });
-    console.log(answerList)
+function rightQuiz(data, Q) {
+    console.log(data)
+    mainContainer.innerHTML=" ";
+    // for( var i = 0; i <data.length; i ++){
+        var question = document.createElement("h1")
+        question.textContent = data[questionIndex].question
+        console.log(question)
+        mainContainer.append(question)
+        var answerList = []
+        var correctAnswer = data[questionIndex].correct_answer
+        console.log(correctAnswer)
+        answerList.push(correctAnswer)
+        // incorrectAnswer = data[0].
+        var incorrectAnswer = data[questionIndex].incorrect_answers
+        console.log(incorrectAnswer)
+        incorrectAnswer.forEach(element => {
+            answerList.push(element)
+        });
+        console.log(answerList)
+    // }
     answerList.forEach(btn => {
         var answerBtn = document.createElement('button')
         answerBtn.classList.add("m-1")
         answerBtn.textContent=btn
         console.log(answerBtn)
         questionContainer.append(answerBtn)
+        answerBtn.addEventListener("click", function(){
+            selectingAnswer(answerBtn.textContent, data)
+        })
     })
 }
 // ---------------------------------------------------------------------
+/* 
+    Create a function to determine whether the correct or wrong answer was selected.
+        if the wrong answer is selected go to next question without adding any points; 
+        else, add 1 point, and display next question.
+*/
 
-//adding next button as we start the quiz
+// create a variable to catch the "correct_answer" value
 
+var score = 0
+function selectingAnswer(ca, dataArr) {
+    var correctAnswer = $("correct_answer")
+    console.log(ca)
+    if(ca === dataArr[questionIndex].correct_answer)
+    {
+        //Add score
+        score += 5
+        console.log(score)
+        console.log("correct")
+        
+    } else {
+        console.log("wrong")
+    }
+    questionIndex ++ 
+    console.log(dataArr.length)
+    nextQuestion(dataArr)
+} 
 
 // ---------------------------------------------------------------------
+
+function nextQuestion(D) {
+    console.log(D.length)
+    console.log(questionIndex)
+    if(questionIndex >= D.length){
+        console.log("Done")
+        end()
+    }else{
+        rightQuiz(D,questionIndex)
+    }
+} 
+
+function end() {
+    bannerObj.removeObj()
+    window.alert(score)
+
+    clearInterval(clockId);
+    finalScore()
+}
+
+
+function finalScore() {
+    scoreEl.text(`Your final score is ` + score );
+    document.createElement("p")
+}
+
