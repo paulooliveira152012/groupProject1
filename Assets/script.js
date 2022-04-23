@@ -81,16 +81,16 @@ const createQuestion = function(){
 
 }
 var questionIndex = 0;
-var mainContainer = document.querySelector("#site-content")
+var questionContainer = document.querySelector("#question-container")
 
 function rightQuiz(data, Q) {
     console.log(data)
-    mainContainer.innerHTML=" ";
+    questionContainer.innerHTML="";
     // for( var i = 0; i <data.length; i ++){
-        var question = document.createElement("h1")
+        var question = document.createElement("p")
         question.textContent = data[questionIndex].question
         console.log(question)
-        mainContainer.append(question)
+        questionContainer.append(question)
         var answerList = []
         var correctAnswer = data[questionIndex].correct_answer
         console.log(correctAnswer)
@@ -105,9 +105,10 @@ function rightQuiz(data, Q) {
     // }
     answerList.forEach(btn => {
         var answerBtn = document.createElement('button')
+        answerBtn.classList.add("m-1")
         answerBtn.textContent=btn
         console.log(answerBtn)
-        mainContainer.append(answerBtn)
+        questionContainer.append(answerBtn)
         answerBtn.addEventListener("click", function(){
             selectingAnswer(answerBtn.textContent, data)
         })
