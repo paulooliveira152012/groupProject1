@@ -1,3 +1,5 @@
+var scoreEl = $("#finalScore")
+
 siteContentEl = $("#site-content")
 // var promptUser = prompt("How many questions would you like?")
 //return response
@@ -79,15 +81,16 @@ const createQuestion = function(){
 
 }
 var questionIndex = 0;
-var mainContainer = document.querySelector("#site-content")
+var questionContainer = document.querySelector("#question-container")
+
 function rightQuiz(data, Q) {
     console.log(data)
-    mainContainer.innerHTML=" ";
+    questionContainer.innerHTML="";
     // for( var i = 0; i <data.length; i ++){
-        var question = document.createElement("h1")
+        var question = document.createElement("p")
         question.textContent = data[questionIndex].question
         console.log(question)
-        mainContainer.append(question)
+        questionContainer.append(question)
         var answerList = []
         var correctAnswer = data[questionIndex].correct_answer
         console.log(correctAnswer)
@@ -102,9 +105,10 @@ function rightQuiz(data, Q) {
     // }
     answerList.forEach(btn => {
         var answerBtn = document.createElement('button')
+        answerBtn.classList.add("m-1")
         answerBtn.textContent=btn
         console.log(answerBtn)
-        mainContainer.append(answerBtn)
+        questionContainer.append(answerBtn)
         answerBtn.addEventListener("click", function(){
             selectingAnswer(answerBtn.textContent, data)
         })
@@ -133,24 +137,35 @@ function selectingAnswer(ca, dataArr) {
     } else {
         console.log("wrong")
     }
-    // questionIndex ++ 
+    questionIndex ++ 
     console.log(dataArr.length)
-    nextQuestion(dataArr, questionIndex++)
+    nextQuestion(dataArr)
 } 
 
 // ---------------------------------------------------------------------
 
-function nextQuestion(D,Q) {
+function nextQuestion(D) {
     console.log(D.length)
-    if(Q >= D.length){
+    console.log(questionIndex)
+    if(questionIndex >= D.length){
         console.log("Done")
         end()
     }else{
-        rightQuiz(D,Q)
+        rightQuiz(D,questionIndex)
     }
 } 
 
 function end() {
     bannerObj.removeObj()
     window.alert(score)
+
+    clearInterval(clockId);
+    finalScore()
 }
+
+
+function finalScore() {
+    scoreEl.text(`Your final score is ` + score );
+    document.createElement("p")
+}
+
