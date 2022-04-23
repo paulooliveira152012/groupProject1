@@ -157,6 +157,7 @@ function nextQuestion(D) {
 function end() {
     bannerObj.removeObj()
     window.alert(score)
+
     clearInterval(clockId);
     finalScore()
 }
@@ -166,3 +167,4 @@ function finalScore() {
     scoreEl.text(`Your final score is ` + score );
     document.createElement("p")
 }
+
