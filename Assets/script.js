@@ -164,4 +164,5 @@ function end() {
 
 function finalScore() {
     scoreEl.text(`Your final score is ` + score );
+    document.createElement("p")
 }
